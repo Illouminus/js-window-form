@@ -467,7 +467,7 @@ function collectAllFormData() {
 			}),
 			width: block.querySelector('input[name="window_width"]').value,
 			height: block.querySelector('input[name="window_height"]').value,
-			glassPackage: block.querySelector('.select-type-window .custom-select .custom-option.selected')?.textContent.trim(),
+			glassPackage: block.querySelector('.window-item-parametr .custom-select .custom-option.selected.pack')?.dataset.value,
 			color: block.querySelector('.parametrs-fill-window .custom-select .custom-option.selected.color')?.dataset.value,
 			houseType: block.querySelector('.additional-options .custom-select .custom-option.selected.house-type')?.textContent.trim(),
 			additionalOptions: Array.from(block.querySelectorAll('.additional-checkboxes input[type="checkbox"]:checked')).map(checkbox => {
