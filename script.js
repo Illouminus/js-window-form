@@ -41,8 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 
-	function initializeWindowTypeSelection() {
-		var windowTypeOptions = document.querySelectorAll('.window-type-option');
+	function initializeWindowTypeSelection(windowBlockContainer) {
+
+		if (!windowBlockContainer)
+			var windowTypeOptions = document.querySelectorAll('.window-type-option');
+		else
+			windowTypeOptions = windowBlockContainer.querySelectorAll('.window-type-option');
+
 
 		windowTypeOptions.forEach(function (option) {
 			option.addEventListener('click', function () {
@@ -236,8 +241,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	initialWindowBlocks.forEach(bindToggleEvent);
 
 
-	function initializeCustomSelects() {
-		const customSelects = document.querySelectorAll('.custom-select');
+	function initializeCustomSelects(container) {
+
+		if (!container)
+			var customSelects = document.querySelectorAll('.custom-select');
+		else
+			customSelects = container.querySelectorAll('.custom-select');
 
 		customSelects.forEach(select => {
 			const trigger = select.querySelector('.custom-select__trigger');
@@ -402,8 +411,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		inputs.forEach(function (input) {
 
-			if (input.type === 'text' || input.type === 'checkbox') {
-				input.value = '';
+			if (input.type === 'text') {
 				input.checked = false;
 			}
 		});
@@ -427,9 +435,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 		newWindowBlock.scrollIntoView({ behavior: 'smooth' });
-		initializeWindowTypeSelection();
+		initializeWindowTypeSelection(newWindowBlock);
 
-		initializeCustomSelects();
+		initializeCustomSelects(newWindowBlock);
 		bindInputEvents(newWindowBlock);
 		bindToggleEvent(newWindowBlock);
 		initializeDeleteButtons(newWindowBlock);
@@ -460,8 +468,8 @@ function collectAllFormData() {
 			width: block.querySelector('input[name="window_width"]').value,
 			height: block.querySelector('input[name="window_height"]').value,
 			glassPackage: block.querySelector('.select-type-window .custom-select .custom-option.selected')?.textContent.trim(),
-			color: block.querySelector('.parametrs-fill-window .custom-select .custom-option.selected')?.textContent.trim(),
-			houseType: block.querySelector('.additional-options .custom-select .custom-option.selected')?.textContent.trim(),
+			color: block.querySelector('.parametrs-fill-window .custom-select .custom-option.selected.color')?.dataset.value,
+			houseType: block.querySelector('.additional-options .custom-select .custom-option.selected.house-type')?.textContent.trim(),
 			additionalOptions: Array.from(block.querySelectorAll('.additional-checkboxes input[type="checkbox"]:checked')).map(checkbox => {
 				return checkbox.value;
 			})
