@@ -469,7 +469,7 @@ function collectAllFormData() {
 			height: block.querySelector('input[name="window_height"]').value,
 			glassPackage: block.querySelector('.window-item-parametr .custom-select .custom-option.selected.pack')?.dataset.value,
 			color: block.querySelector('.parametrs-fill-window .custom-select .custom-option.selected.color')?.dataset.value,
-			houseType: block.querySelector('.additional-options .custom-select .custom-option.selected.house-type')?.textContent.trim(),
+			houseType: block.querySelector('.additional-options .custom-select .custom-option.selected.house-type')?.dataset.value,
 			additionalOptions: Array.from(block.querySelectorAll('.additional-checkboxes input[type="checkbox"]:checked')).map(checkbox => {
 				return checkbox.value;
 			})
